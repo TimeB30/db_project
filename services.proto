@@ -1,0 +1,228 @@
+syntax = "proto3";
+service User{
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
+  rpc GetUsers (GetUsersRequest) returns (GetUsersResponse);
+  rpc CheckLogin (CheckLoginRequest) returns (CheckLoginResponse);
+  rpc Register (RegistrationRequest) returns (RegistrationResponse);
+  rpc ChangeRole (ChangeRoleRequest) returns (ChangeRoleResponse);
+}
+message ChangeRoleRequest{
+  int32 user_id = 1;
+  string role = 2;
+}
+message ChangeRoleResponse{
+  bool is_changed = 1;
+}
+message GetUsersRequest{
+  int32 block_id = 1;
+}
+message GetUsersResponse{
+  repeated GetUserResponse users_info = 1;
+}
+message RegistrationRequest{
+  string user_name = 1;
+  string user_surname = 2;
+  string user_middle_name = 3;
+  string user_login = 4;
+  string user_password = 5;
+}
+message RegistrationResponse{
+  int32 user_id = 1;
+}
+message CheckLoginRequest{
+  string user_login = 1;
+}
+message CheckLoginResponse{
+  bool is_busy = 1;
+}
+
+
+message GetUserRequest {
+  string user_login = 1;
+  string user_password = 2;
+}
+message GetUserResponse {
+  int32 user_id = 1;
+  string user_role = 2;
+  string user_name = 3;
+  int32 block_id = 4;
+  int32 dorm_id = 5;
+}
+
+service Tasks{
+  rpc GetUserTasks (GetTasksRequest) returns (GetTasksResponse);
+  rpc TaskDone (TaskDoneRequest) returns (TaskDoneResponse);
+  rpc MakeTask (MakeTaskRequest) returns (MakeTaskResponse);
+  rpc GetBlockTasks (GetBlockTasksRequest) returns (GetBlockTasksResponse);
+  rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskResponse);
+}
+message DeleteTaskRequest{
+  int32  user_id = 1;
+  int32 task_id = 2;
+}
+message DeleteTaskResponse{
+  bool is_deleted = 1;
+}
+message UserTasks{
+  int32 user_id = 1;
+  string user_name = 2;
+  string user_surname = 3;
+  int32 task_id = 4;
+  string task_name = 5;
+}
+message GetBlockTasksRequest{
+  int32 block_id = 1;
+}
+message GetBlockTasksResponse{
+  repeated UserTasks users_task = 1;
+}
+message MakeTaskRequest{
+  string task_type = 1;
+  string task_name = 2;
+  GetUserResponse sender_info = 3;
+}
+message MakeTaskResponse{
+  bool is_maded = 1;
+}
+message TaskDoneRequest{
+  int32 task_id = 1;
+  int32 user_id = 2;
+}
+message TaskDoneResponse{
+  int32 is_done = 1;
+}
+message GetTasksRequest{
+  int32 user_id = 1;
+}
+message task{
+  int32 task_id = 1;
+  string task_name = 2;
+}
+message GetTasksResponse{
+  repeated task tasks = 1;
+}
+
+
+service History{
+  rpc AddHistory (AddHistoryRequest) returns (AddHistoryResponse);
+  rpc GetBlockHistory (GetBlockHistoryRequest) returns (GetBlockHistoryResponse);
+}
+message HistoryLine{
+  int32 dorm_id = 1;
+  int32 block_id = 2;
+  int32 user_id = 3;
+  string user_name = 4;
+  string user_surname = 5;
+  string action = 6;
+}
+message GetBlockHistoryRequest{
+  int32 block_id = 1;
+}
+message GetBlockHistoryResponse{
+  repeated HistoryLine history = 1;
+}
+message AddHistoryRequest{
+  int32 user_id = 1;
+  int32 block_id = 2;
+  int32 dorm_id = 3;
+  string action = 4;
+}
+message AddHistoryResponse{
+  bool is_added = 1;
+}
+
+
+service Dorm{
+  rpc GetDormsBlocks (GetDormsBlocksRequest) returns (GetDormsBlocksResponse);
+  rpc AddUser (AddUserRequest) returns (AddUserResponse);
+  rpc KickUser (KickUserRequest) returns (KickUserResponse);
+}
+message KickUserRequest{
+  int32 user_id = 1;
+  int32 block_id = 2;
+}
+message KickUserResponse{
+  bool is_kicked = 1;
+}
+message AddUserRequest{
+  int32 user_id = 1;
+  string user_role = 2;
+  int32 block_id = 4;
+}
+message AddUserResponse{
+  bool is_added = 1;
+}
+message block{
+  int32 block_number = 1;
+  int32 block_id = 2;
+}
+message DormBlocks{
+  int32 dorm_id = 1;
+  string dorm_name = 2;
+  repeated block blocks = 3;
+}
+message GetDormsBlocksRequest{
+    int32 free = 1;
+}
+message GetDormsBlocksResponse{
+  repeated DormBlocks DormsBlocks = 1;
+}
+service Request{
+  rpc AddRequest (AddRequestRequest) returns (AddRequestResponse);
+  rpc CancelRequest (CancelRequestRequest) returns (CancelRequestResponse);
+  rpc GetRequest (GetRequestRequest) returns (GetRequestResponse);
+  rpc GetRequests (GetRequestsRequest) returns (GetRequestsResponse);
+  rpc SetRequestStatus (SetRequestStatusRequest) returns (SetRequestStatusResponse);
+  rpc DeleteRequests (DeleteRequestsRequest) returns (DeleteRequestsResponse);
+}
+message DeleteRequestsRequest{
+  int32 block_id = 1;
+}
+message DeleteRequestsResponse{
+  bool are_deleted = 1;
+}
+message SetRequestStatusRequest{
+  int32 request_id = 1;
+  string status = 2;
+}
+message SetRequestStatusResponse{
+  bool is_changed = 1;
+}
+message request{
+  int32 request_id = 1;
+  int32 user_id = 2;
+  string user_name = 3;
+  string user_surname = 4;
+  string user_middle_name = 5;
+}
+message GetRequestsRequest{
+  int32 block_id = 1;
+}
+message GetRequestsResponse{
+  repeated request requests = 1;
+}
+message GetRequestRequest{
+  int32 user_id = 1;
+}
+message GetRequestResponse{
+  int32 request_id = 1;
+  int32 dorm_id = 2;
+  string dorm_name = 3;
+  int32 block_id = 4;
+  int32 block_number = 5;
+  string status = 6;
+}
+message CancelRequestRequest{
+  int32 request_id = 1;
+}
+message CancelRequestResponse{
+  bool is_cancelled = 1;
+}
+message AddRequestResponse{
+  int32 is_added = 1;
+}
+message AddRequestRequest{
+  int32 dorm_id = 1;
+  int32 block_id = 2;
+  int32 user_id = 3;
+}

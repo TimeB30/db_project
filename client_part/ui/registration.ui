@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RegistrationWindow</class>
+ <widget class="QMainWindow" name="RegistrationWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>883</width>
+    <height>730</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url('C:/Users/TimeB/Desktop/db_project/client_part/png/clouds.jpg');
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background: transparent; </string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="surname_line">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::ClickFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: white;
+border: none;                
+    border-radius: 10px;        
+    padding: 10px 20px;          </string>
+      </property>
+      <property name="text">
+       <string>Фамилия</string>
+      </property>
+      <property name="maxLength">
+       <number>64</number>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QPushButton" name="back_button">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background: rgb(0, 148, 216);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+QPushButton:hover {
+    background: rgb(0, 120, 190); /* Цвет при наведении */
+}
+QPushButton:pressed {
+    background: rgb(0, 100, 160); /* Цвет при нажатии */
+}</string>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="6" column="2">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="7" column="1">
+     <widget class="QPushButton" name="registry_button">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>26</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background: rgb(0, 148, 216);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+QPushButton:hover {
+    background: rgb(0, 120, 190); /* Цвет при наведении */
+}
+QPushButton:pressed {
+    background: rgb(0, 100, 160); /* Цвет при нажатии */
+}</string>
+      </property>
+      <property name="text">
+       <string>Зарегистрироваться</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLineEdit" name="login_line">
+      <property name="minimumSize">
+       <size>
+        <width>500</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::ClickFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: white;
+border: none;                
+    border-radius: 10px;        
+    padding: 10px 20px;          </string>
+      </property>
+      <property name="text">
+       <string>Придумайте логин</string>
+      </property>
+      <property name="maxLength">
+       <number>64</number>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="middle_name_line">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::ClickFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: white;
+border: none;                
+    border-radius: 10px;        
+    padding: 10px 20px;          </string>
+      </property>
+      <property name="text">
+       <string>Отчество</string>
+      </property>
+      <property name="maxLength">
+       <number>64</number>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" alignment="Qt::AlignLeft">
+     <widget class="QLabel" name="appointment">
+      <property name="minimumSize">
+       <size>
+        <width>300</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>250</width>
+        <height>250</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: transparent;
+</string>
+      </property>
+      <property name="text">
+       <string>Заполните поля</string>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="name_line">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::ClickFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: white;
+border: none;                
+    border-radius: 10px;        
+    padding: 10px 20px;          </string>
+      </property>
+      <property name="text">
+       <string>Имя</string>
+      </property>
+      <property name="maxLength">
+       <number>64</number>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLineEdit" name="password_line">
+      <property name="minimumSize">
+       <size>
+        <width>500</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::ClickFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: white;
+border: none;                
+    border-radius: 10px;        
+    padding: 10px 20px;          </string>
+      </property>
+      <property name="text">
+       <string>Придумайте пароль</string>
+      </property>
+      <property name="maxLength">
+       <number>64</number>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+   <zorder>login_line</zorder>
+   <zorder>surname_line</zorder>
+   <zorder>back_button</zorder>
+   <zorder>registry_button</zorder>
+   <zorder>middle_name_line</zorder>
+   <zorder>appointment</zorder>
+   <zorder>name_line</zorder>
+   <zorder>password_line</zorder>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

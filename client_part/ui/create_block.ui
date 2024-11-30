@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CreateBlockWindow</class>
+ <widget class="QMainWindow" name="CreateBlockWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>929</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url('C:/Users/TimeB/Desktop/db_project/client_part/png/clouds.jpg');
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>30</number>
+    </property>
+    <property name="rightMargin">
+     <number>30</number>
+    </property>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>141</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item alignment="Qt::AlignHCenter">
+     <widget class="QLabel" name="appointment">
+      <property name="maximumSize">
+       <size>
+        <width>250</width>
+        <height>250</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: transparent;
+</string>
+      </property>
+      <property name="text">
+       <string>Заполните поля</string>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="dorm_info">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+                background: white;
+border: none;                
+    border-radius: 10px;        
+    padding: 10px 20px;     
+            
+
+</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="block_info">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+                background: white;
+border: none;                
+    border-radius: 10px;        
+    padding: 10px 20px;     
+            
+
+</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="create_block_button">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background: rgb(0, 148, 216);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+QPushButton:hover {
+    background: rgb(0, 120, 190); /* Цвет при наведении */
+}
+QPushButton:pressed {
+    background: rgb(0, 100, 160); /* Цвет при нажатии */
+}</string>
+      </property>
+      <property name="text">
+       <string>Создать блок</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="back_button">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background: rgb(0, 148, 216);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+QPushButton:hover {
+    background: rgb(0, 120, 190); /* Цвет при наведении */
+}
+QPushButton:pressed {
+    background: rgb(0, 100, 160); /* Цвет при нажатии */
+}</string>
+      </property>
+      <property name="text">
+       <string>Назад</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>141</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

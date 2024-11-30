@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>372</width>
+    <height>165</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+   background: white;</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPushButton" name="make_admin_button">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: rgb(0, 148, 216);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+QPushButton:hover {
+    background: rgb(0, 120, 190); /* Цвет при наведении */
+}
+QPushButton:pressed {
+    background: rgb(0, 100, 160); /* Цвет при нажатии */
+}</string>
+     </property>
+     <property name="text">
+      <string>Сделать администратором</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="take_admin_button">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: rgb(0, 148, 216);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+QPushButton:hover {
+    background: rgb(0, 120, 190); /* Цвет при наведении */
+}
+QPushButton:pressed {
+    background: rgb(0, 100, 160); /* Цвет при нажатии */
+}</string>
+     </property>
+     <property name="text">
+      <string>Отобрать права администратора </string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="delete_button">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: rgb(0, 148, 216);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+QPushButton:hover {
+    background: rgb(0, 120, 190); /* Цвет при наведении */
+}
+QPushButton:pressed {
+    background: rgb(0, 100, 160); /* Цвет при нажатии */
+}</string>
+     </property>
+     <property name="text">
+      <string>Удалить</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
