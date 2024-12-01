@@ -3,6 +3,7 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QLineEdit, QWidget, QPushButton
 from PyQt5.QtCore import QPoint, Qt
+from PyQt5.QtGui import QIcon
 from services import *
 import re
 def is_password_secure(password):
@@ -571,6 +572,8 @@ class PopUpWidget(QWidget):
 
 app = QApplication(sys.argv)
 window = EntryWindow(UserService())
+window.setWindowIcon(QIcon("png/Default_eng.png"))
+window.setWindowTitle("МАИ Tasks")
 window.resize(1195, 775)
 window.show()
 
