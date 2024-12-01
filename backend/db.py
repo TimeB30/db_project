@@ -76,7 +76,6 @@ class Database:
                                    "VALUES (%s,%s,%s,%s)",(user_id,block_id,dorm_id,action,))
                     return 1
         except Exception as e:
-            print(e)
             return 0
     def make_task(self,task_type,task_name,sender_info):
         try:
@@ -102,7 +101,6 @@ class Database:
                         cursor.execute("INSERT INTO user_task (user_id,task_id) VALUES (%s,%s)", (user_id, task_id,))
             return 1
         except Exception as e :
-            print (e)
             return 0
     def get_block_tasks(self,block_id):
         try:
@@ -115,7 +113,6 @@ class Database:
                                    "ORDER BY users.user_id ",(block_id,))
                     return cursor.fetchall()
         except Exception as e:
-            print(e)
             return []
     def delete_task(self,task_id,user_id):
         try:
@@ -148,7 +145,6 @@ class Database:
                                    "ORDER BY dorms.dorm_id, dorm_block.block_id")
                     return cursor.fetchall()
         except Exception as e:
-            print(e)
             return 0
     def AddUser(self,user_id,user_role,block_id):
         try:
@@ -158,7 +154,6 @@ class Database:
                     cursor.execute("UPDATE users SET user_role = %s WHERE user_id = %s",(user_role,user_id,))
                     return 1
         except Exception as e:
-            print(e)
             return 0
     def add_request(self,dorm_id, block_id, user_id):
         try:

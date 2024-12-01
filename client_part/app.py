@@ -27,22 +27,22 @@ def go_to(widgets,widget_name):
 def handle_focus_in(event, line_edit):
     """Обработка события focusIn (при получении фокуса)."""
     if not hasattr(line_edit, "user_typed"):
-        line_edit.user_typed = False  # Инициализируем атрибут, если он отсутствует
+        line_edit.user_typed = False
     if not line_edit.user_typed and (line_edit.text() == line_edit.placeholder_text or line_edit.text() in ["Введите логин", "Введите пароль"]):
-        line_edit.setText("")  # Очищаем поле
-    QLineEdit.focusInEvent(line_edit, event)  # Вызов стандартного обработчика
+        line_edit.setText("")
+    QLineEdit.focusInEvent(line_edit, event)
 
 
 def handle_focus_out(event, line_edit):
     """Обработка события focusOut (при потере фокуса)."""
     if not hasattr(line_edit, "user_typed"):
-        line_edit.user_typed = False  # Инициализируем атрибут, если он отсутствует
-    if not line_edit.text().strip():  # Если поле пустое
+        line_edit.user_typed = False
+    if not line_edit.text().strip():
         line_edit.setText(line_edit.placeholder_text)
         line_edit.user_typed = False
     else:
         line_edit.user_typed = True
-    QLineEdit.focusOutEvent(line_edit, event)  # Вызов стандартного обработчика
+    QLineEdit.focusOutEvent(line_edit, event)
 def rows(users,path):
     layout = QVBoxLayout()
     for i in users.users_info:
@@ -63,9 +63,6 @@ def admin_rows(users,path,func,admin_id):
             layout.addWidget(row)
             continue
         row.button.setProperty("user_info",i)
-        # row.button.setProperty("user_id",i.user_id)
-        # row.button.setProperty("user_role", i.user_role)
-        # row.setProperty("user_name",i.user_name)
         row.button.setText(":")
         row.button.clicked.connect(func)
         layout.addWidget(row)
@@ -129,24 +126,22 @@ class RegistrationWindow(QMainWindow):
                 if (i.objectName() == "middle_name_line"):
                     i.setText("")
                     continue
-                # self.registry_button.prev_text = self.registry_button.text()
                 self.appointment.setText("! Заполните все поля")
                 return
         user_login = self.login_line.text()
+        user_password = self.password_line.text()
+        if (len(user_login) < 4):
+            self.appointment.setText("! Логин должен состоять\n минимум из 4 символов")
+            return
+        is_secure, message = is_password_secure(user_password)
+        if not (is_secure):
+            self.appointment.setText(message)
+            return
         is_user = self.UserService.CheckLogin(user_login).is_busy
         if not (is_user):
             user_name = self.name_line.text()
             user_surname = self.surname_line.text()
             user_middle_name = self.middle_name_line.text()
-            user_login = self.login_line.text()
-            user_password = self.password_line.text()
-            if (len(user_login) < 4):
-                self.appointment.setText("! Логин должен состоять\n минимум из 4 символов")
-                return
-            is_secure, message = is_password_secure(user_password)
-            if not (is_secure):
-                self.appointment.setText(message)
-                return
             user_id = self.UserService.Register(user_name=user_name, user_surname=user_surname, user_middle_name=user_middle_name,
                                       user_login=user_login, user_password=user_password).user_id
             if (user_id == 0):
@@ -181,9 +176,6 @@ class MainWindow(QMainWindow):
                     decline_button.setObjectName("decline_button")
                     row.task.setText(f"Заявка от {i.user_surname} {i.user_name}")
                     row.button.setText("Принять")
-                    # button = QPushButton("Отклонить")
-                    # button.setObjectName("cancel_button")
-                    # button.setStyleSheet("background:black;")
                     row.horizontalLayout.addWidget(decline_button)
                     row.button.setProperty("request",i)
                     row.button.clicked.connect(self.accept_user)
@@ -221,8 +213,6 @@ class MainWindow(QMainWindow):
         request_id = request_info.request_id
         user_id = request_info.user_id
         block_id = self.user_info.block_id
-        # self.UserService.AddUser(user_id, "user", block_id)
-        # self.UserService.CancelRequest(request_id)
         self.UserService.SetRequestStatus(request_id,"declined")
         self.UserService.AddHistory(self.user_info,
                                     f"{self.user_info.user_name} отклонил заявку пользователя {request_info.user_name}")
@@ -247,7 +237,6 @@ class MainWindow(QMainWindow):
         user_name = self.user_info.user_name
         self.UserService.AddHistory(self.user_info,f"{user_name} выполнил задание {task_info.task_name}")
         self.UserService.TaskDone(self.user_info.user_id, task_id)
-        print(f"Task with task_id: {task_id} was cliked")
 
     def history_button_func(self):
         self.setCentralWidget(HistoryWindow(self.UserService,self.user_info))
@@ -317,7 +306,6 @@ class AllTasksWindow(QMainWindow):
         for i in block_tasks.users_task:
             row = loadUi(row_path)
             row.task.setText(f"{i.user_name} {i.user_surname}: {i.task_name}")
-            # row.setMinimumSize(0,70)
             if (is_admin):
                 row.button.setText("Удалить")
                 row.button.clicked.connect(self.delete_task_button_func)
@@ -385,7 +373,6 @@ class RequestWindow(QMainWindow):
                         self.block_info.addItem(f"{t.block_number}", t.block_id)
             self.block_info.setItemText(0, "Выберите блок")
     def request_button_func(self):
-        print("hell yeah")
         if (self.dorm_info.currentData() == 0 or self.block_info.currentData() == 0):
             self.request_button.setText("Выберите общежитие")
             return
@@ -479,7 +466,6 @@ class CreateBlockWindow(QMainWindow):
         self.user_info.block_id = self.block_info.currentData()
         self.user_info.user_role = "admin"
         res = self.UserService.AddUser(self.user_info.user_id, self.user_info.user_role, self.user_info.block_id).is_added
-        print(res)
         next_widget = MainWindow(self.UserService,self.user_info)
         self.setCentralWidget(next_widget)
     def back_button_func(self):
@@ -560,8 +546,6 @@ class UsersWindow(QMainWindow):
         user_name = user_info.user_name
         user_id = user_info.user_id
         label = self.last_row.findChild(QLabel,"task")
-        # user_id = button.property("user_id")
-        # user_name = self.last_row.property("user_name")
         label.setText(f"{user_name}: admin")
         self.UserService.ChangeRole(user_id,"admin")
         self.UserService.AddHistory(self.user_info,f"{self.user_info.user_name} сделал администратором {user_name}")
@@ -574,8 +558,6 @@ class UsersWindow(QMainWindow):
         user_name = user_info.user_name
         user_id = user_info.user_id
         label = self.last_row.findChild(QLabel, "task")
-        # user_id = button.property("user_id")
-        # user_name = self.last_row.property("user_name")
         label.setText(f"{user_name}: user")
         self.UserService.ChangeRole(user_id, "user")
         self.UserService.AddHistory(self.user_info, f"{self.user_info.user_name} отобрал права администратора {user_name}")
