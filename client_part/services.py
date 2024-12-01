@@ -1,8 +1,6 @@
 import services_pb2_grpc
 import services_pb2
 import grpc
-from google.protobuf.timestamp_pb2 import Timestamp
-from datetime import datetime
 class UserService:
     def __init__(self,ip_port="localhost:50051"):
         self.ip_port = ip_port

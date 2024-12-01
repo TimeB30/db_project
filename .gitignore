@@ -1,7 +1,7 @@
-./postgres/.idea
-./client_part/.idea
-./client_part/.venv
-./client_part/__pycache__
-./backend/.idea
-./backend/.venv
-./backend/__pycache__
+/postgres/.idea
+/client_part/.idea
+/client_part/.venv
+/client_part/__pycache__
+/backend/.idea
+/backend/.venv
+/backend/__pycache__
