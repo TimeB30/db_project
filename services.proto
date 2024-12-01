@@ -171,7 +171,7 @@ service Request{
   rpc AddRequest (AddRequestRequest) returns (AddRequestResponse);
   rpc CancelRequest (CancelRequestRequest) returns (CancelRequestResponse);
   rpc GetRequest (GetRequestRequest) returns (GetRequestResponse);
-  rpc GetRequests (GetRequestsRequest) returns (GetRequestsResponse);
+  rpc GetRequests (GetRequestsRequest) returns (GetRequestsResponse);В
   rpc SetRequestStatus (SetRequestStatusRequest) returns (SetRequestStatusResponse);
   rpc DeleteRequests (DeleteRequestsRequest) returns (DeleteRequestsResponse);
 }
@@ -194,6 +194,7 @@ message request{
   string user_name = 3;
   string user_surname = 4;
   string user_middle_name = 5;
+  string status = 6;
 }
 message GetRequestsRequest{
   int32 block_id = 1;

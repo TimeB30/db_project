@@ -55,18 +55,18 @@ class Database:
                     if (task_type == "single"):
                         cursor.execute("DELETE FROM user_task WHERE user_id = %s AND task_id = %s",(user_id,task_id,))
                     else:
-                        cursor.execute("SELECT block_id FROM user_block WHERE user_id = %s")
+                        cursor.execute("SELECT block_id FROM user_block WHERE user_id = %s",(user_id,))
                         user_block_id = cursor.fetchone()[0]
                         cursor.execute("SELECT user_id FROM user_block WHERE user_id > %s AND block_id = %s ORDER BY user_id LIMIT 1", (user_id,user_block_id,))
                         next_user_id = cursor.fetchone()
                         if next_user_id == None:
-                            cursor.execute("SELECT user_id FROM user_block WHERE block = %s ORDER BY user_id LIMIT 1",(user_block_id,))
+                            cursor.execute("SELECT user_id FROM user_block WHERE block_id = %s ORDER BY user_id LIMIT 1",(user_block_id,))
                             next_user_id = cursor.fetchone()[0]
                         else:
                             next_user_id = next_user_id[0]
-                        cursor.execut("UPDATE user_task SET user_id = %s WHERE user_id = %s",(next_user_id,user_id,))
-                        return 1
-        except:
+                        cursor.execute("UPDATE user_task SET user_id = %s WHERE task_id = %s",(next_user_id,task_id,))
+                    return 1
+        except Exception as e:
             return 0
     def add_history(self,user_id,block_id,dorm_id,action):
         try:
@@ -130,7 +130,7 @@ class Database:
             with psycopg2.connect(**self.params) as connection:
                 with connection.cursor() as cursor:
                     cursor.execute("SELECT history.dorm_id, history.block_id, history.user_id, users.user_name, users.user_surname, history.action "
-                                   "FROM history JOIN users USING(user_id) ORDER BY date_time DESC")
+                                   "FROM history JOIN users USING(user_id) WHERE block_id = %s ORDER BY date_time DESC",(block_id,))
                     return cursor.fetchall()
         except:
             return 0
@@ -206,7 +206,7 @@ class Database:
         try:
             with psycopg2.connect(**self.params) as connection:
                 with connection.cursor() as cursor:
-                    cursor.execute("SELECT requests.request_id, requests.user_id, users.user_name, users.user_surname, users.user_middle_name "
+                    cursor.execute("SELECT requests.request_id, requests.user_id, users.user_name, users.user_surname, users.user_middle_name, requests.status "
                                    "FROM requests "
                                    "JOIN users ON users.user_id = requests.user_id "
                                    "WHERE requests.block_id = %s",(block_id,))

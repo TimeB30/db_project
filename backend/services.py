@@ -144,7 +144,7 @@ class RequestService(services_pb2_grpc.RequestServicer):
         if (requests):
             for i in requests:
                 answer.append(services_pb2.request(request_id=i[0],user_id=i[1], user_name = i[2],
-                                                       user_surname = i[3], user_middle_name=i[4]))
+                                                       user_surname = i[3], user_middle_name=i[4], status=i[5]))
             return services_pb2.GetRequestsResponse(requests=answer)
         return services_pb2.GetRequestsResponse()
     def SetRequestStatus(self,request,context):

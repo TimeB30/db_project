@@ -4,6 +4,23 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QLineEdit, QWidget, QPushButton
 from PyQt5.QtCore import QPoint, Qt
 from services import *
+import re
+def is_password_secure(password):
+    if len(password) < 8:
+        return False, "Пароль должен быть\nне короче 8 символов."
+
+    if not re.search(r"\d", password):
+        return False, "Пароль должен\nсодержать хотя бы одну цифру."
+
+    if not re.search(r"[A-Z]", password):
+        return False, "Пароль должен\nсодержать хотя бы одну заглавную букву."
+
+    if not re.search(r"[a-z]", password):
+        return False, "Пароль должен\nсодержать хотя бы одну строчную букву."
+
+    if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+        return False, "Пароль должен\nсодержать хотя бы один специальный символ."
+    return True, "Пароль безопасен."
 def go_to(widgets,widget_name):
     next_widget = widgets.findChild(QWidget, widget_name)
     widgets.setCurrentWidget(next_widget)
@@ -123,6 +140,13 @@ class RegistrationWindow(QMainWindow):
             user_middle_name = self.middle_name_line.text()
             user_login = self.login_line.text()
             user_password = self.password_line.text()
+            if (len(user_login) < 4):
+                self.appointment.setText("! Логин должен состоять\n минимум из 4 символов")
+                return
+            is_secure, message = is_password_secure(user_password)
+            if not (is_secure):
+                self.appointment.setText(message)
+                return
             user_id = self.UserService.Register(user_name=user_name, user_surname=user_surname, user_middle_name=user_middle_name,
                                       user_login=user_login, user_password=user_password).user_id
             if (user_id == 0):
@@ -148,21 +172,22 @@ class MainWindow(QMainWindow):
         if (self.user_info.user_role == "admin"):
             requests_info = self.UserService.GetRequests(self.user_info.block_id)
             for i in requests_info.requests:
-                row = loadUi("ui/row.ui")
-                button = loadUi("ui/decline_button.ui")
-                decline_button = button.decline_button
-                decline_button.clicked.connect(self.decline_user)
-                decline_button.setProperty("request",i)
-                decline_button.setObjectName("decline_button")
-                row.task.setText(f"Заявка от {i.user_surname} {i.user_name}")
-                row.button.setText("Принять")
-                # button = QPushButton("Отклонить")
-                # button.setObjectName("cancel_button")
-                # button.setStyleSheet("background:black;")
-                row.horizontalLayout.addWidget(decline_button)
-                row.button.setProperty("request",i)
-                row.button.clicked.connect(self.accept_user)
-                layout.addWidget(row)
+                if i.status != "declined":
+                    row = loadUi("ui/row.ui")
+                    button = loadUi("ui/decline_button.ui",row)
+                    decline_button = button.decline_button
+                    decline_button.clicked.connect(self.decline_user)
+                    decline_button.setProperty("request",i)
+                    decline_button.setObjectName("decline_button")
+                    row.task.setText(f"Заявка от {i.user_surname} {i.user_name}")
+                    row.button.setText("Принять")
+                    # button = QPushButton("Отклонить")
+                    # button.setObjectName("cancel_button")
+                    # button.setStyleSheet("background:black;")
+                    row.horizontalLayout.addWidget(decline_button)
+                    row.button.setProperty("request",i)
+                    row.button.clicked.connect(self.accept_user)
+                    layout.addWidget(row)
         for i in self.tasks_info.tasks:
             row = loadUi("ui/row.ui")
             row.task.setText(f"{i.task_name}")
