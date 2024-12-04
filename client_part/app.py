@@ -284,7 +284,7 @@ class MakeTaskWindow(QMainWindow):
         task_type = self.task_type.currentData()
         task_name = self.task_info.text()
         if (self.UserService.MakeTask(task_type, task_name, self.user_info)):
-            self.UserService.AddHistory(self.user_info, f"Создал задание {task_name}")
+            self.UserService.AddHistory(self.user_info, f"{self.user_info.user_name} cоздал задание {task_name}")
             self.appointment2.setText("Задание создано!")
         else:
             self.appointment2.setText("Ошибка!")
@@ -328,6 +328,7 @@ class AllTasksWindow(QMainWindow):
         button.deleteLater()
         task.setText(f"Задание удалено")
         self.UserService.DeleteTask(task_id,user_id)
+        self.UserService.AddHistory(self.user_info, f"{self.user_info.user_name} удалил задание {task_info.task_name}")
 class HistoryWindow(QMainWindow):
     def __init__(self,UserService, user_info):
         self.UserService = UserService
@@ -340,7 +341,7 @@ class HistoryWindow(QMainWindow):
         users_history = self.UserService.GetBlockHistory(self.user_info.block_id)
         for i in users_history.history:
             row = loadUi("ui/row_empty.ui")
-            row.task.setText(f"{i.user_name} {i.user_surname} {i.action}")
+            row.task.setText(f" {i.action}")
             layout.addWidget(row)
         layout.setObjectName("main_layout")
         self.scroll_widget.setLayout(layout)
@@ -500,6 +501,7 @@ class AskWindow(QMainWindow):
                     next_user_index = 0
                 self.UserService.ChangeRole(users[next_user_index].user_id, "admin")
         self.UserService.KickUser(self.user_info.user_id,self.user_info.block_id)
+        self.UserService.AddHistory(self.user_info,f"{self.user_info.user_name} покинул блок")
 class UsersWindow(QMainWindow):
     def __init__(self,UserService,user_info):
         self.user_info = user_info
@@ -532,12 +534,15 @@ class UsersWindow(QMainWindow):
         self.last_row = button.parentWidget()
     def delete_button_func(self):
         self.pop_up.hide()
+
         label = self.last_row.findChild(QLabel,"task")
         label.setText("Пользователь удален")
         button = self.last_row.findChild(QPushButton,"button")
         button.deleteLater()
         user_id = button.property("user_info").user_id
+        user_name = button.property("user_info").user_name
         self.UserService.KickUser(user_id, self.user_info.block_id)
+        self.UserService.AddHistory(self.user_info, f"{self.user_info.user_name} удалил участника {user_name}")
     def make_admin_button_func(self):
         self.pop_up.hide()
         button = self.sender()
